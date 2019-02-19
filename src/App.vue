@@ -27,14 +27,14 @@
       </div>
 
       <div>
-        <router-link to="/order">
-          <div class="img" v-if="selected=='order'">
+        <router-link to="/materialcircle">
+          <div class="img" v-if="selected=='materialcircle'">
             <img src="./assets/tab/sources.png">
           </div>
           <div class="img" v-else>
             <img src="./assets/tab/source.png">
           </div>
-          <p :class="{ 'fc-fen': selected=='order' }">素材圈</p>
+          <p :class="{ 'fc-fen': selected=='materialcircle' }">素材圈</p>
         </router-link>
       </div>
       <div>
@@ -82,8 +82,8 @@ export default {
       if (this.$route.path === "/shop") {
         return "shop";
       }
-      if (this.$route.path === "/order") {
-        return "order";
+      if (this.$route.path === "/materialcircle") {
+        return "materialcircle";
       }
       if (this.$route.path === "/me") {
         return "me";
@@ -92,7 +92,7 @@ export default {
     navshow() {
       let url = this.$route.path;
 
-      let urlarr = ["/", "/classify", "/shop", "/order", "/me"];
+      let urlarr = ["/", "/classify", "/shop", "/materialcircle", "/me"];
       if (urlarr.includes(url)) {
         return true;
       }
@@ -149,5 +149,8 @@ export default {
 }
 .pd-lr-15 {
   padding: 0 15px;
+}
+.pd-tb-15 {
+  padding: 15px 0;
 }
 </style>

@@ -3,35 +3,38 @@ import Router from 'vue-router'
 
 import Index from '@/pages/index'
 import Me from '@/pages/me/me'
-import Order from '@/pages/order/orderList'
+import Materialcircle from '@/pages/materialcircle/materiaList'
 import Shop from '@/pages/shop/shopList'
 import Classify from '@/pages/classify/classifyList'
 //产品
-import Goods from '@/pages/home/index_more'
-import Extension from '@/pages/home/extension'
-import WelfareAgency from '@/pages/home/welfareAgency'
 import ProductDetail from '@/pages/home/productDetail'
 import WordMouth from '@/pages/home/wordMouth'
 import ConfirmationOrder from '@/pages/home/confirmationOrder'
 import CompanyIntroduction from '@/pages/home/companyIntroduction'
-import Buy from '@/pages/home/buy'
-import Pay from '@/pages/home/pay'
-import Agreement from '@/pages/home/agreement'
+import Shopstyle from '@/pages/home/shopstyle'
+import OperationalGuide from '@/pages/home/operationalGuide'
+import Teamstyle from '@/pages/home/teamstyle'
+import Navigation from '@/pages/home/navigation'
+import NewActivities from '@/pages/home/newActivities'
+import NewArrivals from '@/pages/home/newArrivals'
+import MerchantDetail from '@/pages/home/merchantDetail'
+import MerchantEntry from '@/pages/home/merchantEntry'
 import Search from '@/pages/home/search'
-import PreBuy from '@/pages/home/preBuy'
-import ApplyText from '@/pages/home/applyText'
+// 素材圈
+import Answers from '@/pages/materialcircle/answers'
+import AnswersSearch from '@/pages/materialcircle/answersSearch'
+import ImageText from '@/pages/materialcircle/imageText'
+import ReportDetail from '@/pages/materialcircle/reportDetail'
+import MaterialDetail from '@/pages/materialcircle/materialDetail'
 //订单
-import Comments from '@/pages/order/comments'
+
 import OrderDetail from '@/pages/order/orderDetail'
 import Relet from '@/pages/order/relet'
 import Shopping from '@/pages/order/shopping'
 import People from '@/pages/order/people'
-
 import Refund from '@/pages/order/refund'
 import TimeQuantum from '@/pages/order/timeQuantum'
-import AppointmentExpress from '@/pages/order/appointmentExpress'
 
-import Calendar from '@/pages/order/calendar'
 
 //个人中心
 import MyInformation from '@/pages/me/myInformation'
@@ -103,39 +106,42 @@ export default new Router({
 
   routes: [
     { path: '/', component: Index, meta: { title: '首页' } },
-    { path: '/shop', component: Shop, meta: { title: '门店' } },
-    { path: '/order', component: Order, meta: { title: '全国连锁' } },
+    { path: '/shop', component: Shop, meta: { title: '全国连锁' } },
+    { path: '/materialcircle', component: Materialcircle, meta: { title: '素材圈' } },
     { path: '/me', component: Me, meta: { title: '我的' } },
     { path: '/classify', component: Classify, meta: { title: '分类' } },
+
+    // 素材圈
+
+    { path: '/answers', component: Answers, meta: { title: '百问百答详情' } },
+    { path: '/answersSearch', component: AnswersSearch, meta: { title: '百问百答搜索' } },
+    { path: '/imageText', component: ImageText, meta: { title: '百问百答详情' } },
+    { path: '/reportDetail', component: ReportDetail, meta: { title: '宣传报道详情' } },
+    { path: '/materialDetail', component: MaterialDetail, meta: { title: '素材发圈详情' } },
+
     //订单
-    { path: '/comments', component: Comments, meta: { title: '评价' } },
+
     { path: '/orderDetail/:id', component: OrderDetail, meta: { title: '订单详情' } },
     { path: '/relet/:id', component: Relet, meta: { title: '续租' } },
     { path: '/shopping', component: Shopping, meta: { title: '购买' } },
     { path: '/people/:type', component: People, meta: { title: '自取联系人' } },
-
     { path: '/refund/:id', component: Refund, meta: { title: '退租' } },
     { path: '/timeQuantum', component: TimeQuantum, meta: { title: '选择时间段' } },
-    { path: '/appointmentExpress/:id', component: AppointmentExpress, meta: { title: '预约快递' } },
 
-    { path: '/calendar/:type', component: Calendar, meta: { title: '时间' } },
-    { path: '/calendar/:type/:type1', component: Calendar, meta: { title: '时间' } },
     //产品
-    { path: '/goods/:id', component: Goods, meta: { title: '产品列表' } },
-    { path: '/extension', component: Extension, meta: { title: '我要推广' } },
-    { path: '/welfareAgency', component: WelfareAgency, meta: { title: '福利社' } },
     { path: '/productDetail/:id', component: ProductDetail, meta: { title: '产品详情' } },
-    {
-      path: '/confirmationOrder', component: ConfirmationOrder, meta: { title: '确认订单' }
-    },
+    { path: '/confirmationOrder', component: ConfirmationOrder, meta: { title: '确认订单' } },
     { path: '/companyIntroduction', component: CompanyIntroduction, meta: { title: '公司介绍' } },
+    { path: '/shopstyle', component: Shopstyle, meta: { title: '店铺风采' } },
+    { path: '/operationalGuide', component: OperationalGuide, meta: { title: '操作指引' } },
+    { path: '/teamstyle', component: Teamstyle, meta: { title: '团队风采' } },
+    { path: '/navigation', component: Navigation, meta: { title: '一键导航' } },
+    { path: '/newActivities', component: NewActivities, meta: { title: '最新活动' } },
+    { path: '/newArrivals', component: NewArrivals, meta: { title: '新品推荐' } },
+    { path: '/merchantEntry', component: MerchantEntry, meta: { title: '商家入驻' } },
+    { path: '/merchantDetail', component: MerchantDetail, meta: { title: '商家入驻详情' } },
     { path: '/wordMouth', component: WordMouth, meta: { title: '口碑' } },
-    { path: '/buy', component: Buy, meta: { title: '下单' } },
-    { path: '/pay/:orderid', component: Pay, meta: { title: '额度' } },
-    { path: '/zagreement', component: Agreement, meta: { title: '协议' } },
     { path: '/search', component: Search, meta: { title: '搜索' } },
-    { path: '/preBuy', component: PreBuy, meta: { title: '预下单' } },
-    { path: '/applyText', component: ApplyText, meta: { title: '支付' } },
 
     //个人中心
     { path: '/myInformation', component: MyInformation, meta: { title: '我的资料' } },
@@ -171,7 +177,7 @@ export default new Router({
     { path: '/inputCode/:phone', component: InputCode, meta: { title: '输入验证码' } },
 
     //门店
-    { path: '/shopDetail', component: ShopDetail, meta: { title: '门店详情' } },
+    { path: '/shopDetail', component: ShopDetail, meta: { title: '店铺详情' } },
 
     //免押认证
     { path: '/certification', component: Certification, meta: { title: '认证中心' } },

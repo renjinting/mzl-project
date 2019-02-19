@@ -216,10 +216,10 @@ export default {
   margin-top: 5px;
 }
 .itemimg {
-  width: 88px;
-  height: 89px;
+  width: 90px;
+  height: 92px;
   border-radius: 5px;
-  margin-right: 10px;
+  margin: 0 5px;
 }
 .product_det {
   width: 92%;

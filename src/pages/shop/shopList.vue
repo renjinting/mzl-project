@@ -1,29 +1,30 @@
 <template>
   <div>
-    <van-search placeholder="请输入搜索关键词" v-model.trim="value" show-action>
-      <div slot="action" @click="onSearch">搜索</div>
-    </van-search>
+    <div class="pd-lr-15 sear_box flexbox">
+      <div class="flex-align-items">
+        <span>深圳</span>
+        <img class="img_sanjiao" src="../../assets/photo/sanjiao.png">
+      </div>
+      <div class="sear flex-align-items bgc" @click="gosearch">
+        <van-icon name="search" size="20px" color="#979797"/>
+        <span class="fc-grey fz12">搜索店铺</span>
+      </div>
+    </div>
 
     <div class="shoplist">
-      <div v-for="(item,index) in list" :key="index" :title="item">
+      <div v-for="(item,index) in 9" :key="index" :title="item" @click="goshopDetail">
         <div class="item">
-          <router-link :to="{path:'/ShopDetail',query:{store_id:item.store_id}}">
-            <div class="flex-jc-between">
-              <div class="shop_title">{{item.store_name}}</div>
-              <van-icon name="arrow"/>
+          <div class="flex-jc-between">
+            <div class="shop_title">龙华魅姿莱美容馆</div>
+            <div>1.3km</div>
+          </div>
+          <div class="flexbox" style=" padding-top: 10px;">
+            <img class="img_location" src="../../assets/photo/location.png">
+            <div class="fz12 fc-grey">
+              深圳市龙华新区人民北路788号(龙华友谊
+              书城隔壁
             </div>
-            <div
-              class="txt f12"
-            >{{(item.store_province||'')+(item.store_district||'')+(item.store_city||'')+(item.store_Address||'')}}</div>
-          </router-link>
-
-          <router-link
-            class="dt text-c"
-            :to="`/map/${item.coordinate}/${item.store_name},${item.store_province+item.store_district+item.store_city}`"
-          >
-            <img class="ck_img" src="../../assets/mddw.png">
-            <span class="txt f12">查看地图</span>
-          </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -39,64 +40,64 @@ export default {
       value: ""
     };
   },
-  created() {
-    if (!window.localStorage.getItem("userinfo")) {
-      this.$router.replace({ path: "/login" });
-    }
-    this.getlist();
-  },
+  created() {},
   methods: {
-    onSearch() {
-      console.log(this.value);
+    // 搜索
+    gosearch() {
+      this.$router.push({ path: "/answersSearch/" });
     },
-    getlist() {
-      Toast.loading({ mask: true, message: "加载中..." });
-      this.axios.post(this.API + "api/Lease/store_select").then(res => {
-        console.log(res.data, "list");
-        let resdata = res.data;
-        if (resdata.code == 200) {
-          Toast.clear();
-          this.list = resdata.data;
-        } else {
-          Toast.clear();
-          Toast(resdata.message);
-        }
-      });
+    goshopDetail() {
+      this.$router.push({ path: "/shopDetail/" });
     }
   }
 };
 </script>
 
 <style scoped>
-.f12 {
+.fz12 {
   font-size: 12px;
+}
+.img_sanjiao {
+  width: 12px;
+  height: 10px;
+  margin-right: 10px;
+}
+.sear_box {
+  padding-top: 10px;
+}
+.sear {
+  width: 240px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.sear .van-icon {
+  padding-left: 80px;
 }
 
 .shoplist {
   margin-bottom: 60px;
-  padding-top: 2px;
-  background: #fbfbfb;
 }
 .item {
   background: #fff;
   padding: 10px 20px;
   margin: 12px 14px 0 14px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 6px 1px rgba(237, 237, 237, 1);
 }
 .shop_title {
   font-size: 15px;
-  color: #7a7a7a;
+  font-weight: 600;
 }
-.txt {
-  width: 220px;
-  color: #dcdddf;
-  margin-top: 5px;
+.img_sanjiao {
+  width: 12px;
+  height: 10px;
 }
-.ck_img {
-  width: 10px;
-  height: 12px;
-}
-.dt {
-  margin-top: 15px;
-  display: block;
+.img_location {
+  width: 12px;
+  height: 16px;
+  margin: 3px 5px 0 0;
 }
 </style>

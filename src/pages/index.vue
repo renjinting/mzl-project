@@ -1,10 +1,10 @@
 <template>
   <div>
-    <!-- <div class="flex-jc-between top_sear bgc">
-      <div class="dw flex-align-items">
+    <!-- <div class="dw flex-align-items">
         附近门店：
         <span class="fc-blue text-line">{{nearShop}}</span>
-      </div>
+    </div>-->
+    <!-- <div class="bgc pd-15">
       <div class="sear flex-align-items" @click="gosearch">
         <van-icon name="search"/>
         <span>搜索你想要的商品</span>
@@ -27,38 +27,38 @@
         <img src="../assets/photo/gsjs.png"> 公司介绍
       </div>
       <div class="tg">
-        <router-link to="/Extension">
+        <router-link to="/shopstyle">
           <img src="../assets/photo/dpfc.png"> 店铺风采
         </router-link>
       </div>
       <div class="tg">
-        <router-link to="/WelfareAgency">
+        <router-link to="/operationalGuide">
           <img src="../assets/photo/czzy.png"> 操作指引
         </router-link>
       </div>
       <div class="tg">
-        <router-link to="/WelfareAgency">
+        <router-link to="/teamstyle">
           <img src="../assets/photo/tdfc.png"> 团队风采
         </router-link>
       </div>
     </div>
 
     <div class="flex-jc-around bgc">
-      <div class="tg" @click="gohosting">
+      <div class="tg" @click="gonavigation">
         <img src="../assets/photo/yjdh.png"> 一键导航
       </div>
       <div class="tg">
-        <router-link to="/Extension">
+        <router-link to="/newActivities">
           <img src="../assets/photo/zxhd.png"> 最新活动
         </router-link>
       </div>
       <div class="tg">
-        <router-link to="/WelfareAgency">
+        <router-link to="/newArrivals">
           <img src="../assets/photo/xptj.png"> 新品推荐
         </router-link>
       </div>
       <div class="tg">
-        <router-link to="/WelfareAgency">
+        <router-link to="/merchantEntry">
           <img src="../assets/photo/sjrz.png"> 商家入驻
         </router-link>
       </div>
@@ -68,27 +68,24 @@
     </div>
     <div class="bgc">
       <div class="title flex-align-items">
-        <img src="../assets/photo/sjrz.png" class="img_rx"> 热销产品
+        <img src="../assets/photo/re.png" class="img_rx"> 热销产品
       </div>
 
-      <div class="product" v-for="(item,index) in 4">
-        <div @click="toDetail">
-          <div class="img_pro">
-            <img src="../assets/photo/banner.png">
-          </div>
-          <div class="pro_title newline">
-            欧莱雅清润葡萄籽精华 欧莱雅清润葡萄籽精华
-            膜力水 130ml
-          </div>
+      <div class="product" v-for="(item,index) in 4" @click="toDetail">
+        <div class="img_pro">
+          <img src="../assets/photo/banner.png">
+        </div>
+        <div class="pro_title newline">
+          欧莱雅清润葡萄籽精华 欧莱雅清润葡萄籽精华
+          膜力水 130ml
+        </div>
 
-          <div class="pro_price">
-            <span class="n_price fc-fen">¥259.00</span>
-            <del class="o_price fc-grey">¥289.00</del>
-          </div>
+        <div class="pro_price">
+          <span class="n_price fc-fen">¥259.00</span>
+          <del class="o_price fc-grey">¥289.00</del>
         </div>
       </div>
     </div>
-
     <div class="em bgc"></div>
   </div>
 </template>
@@ -111,9 +108,6 @@ export default {
   },
 
   created() {
-    if (!window.localStorage.getItem("userinfo")) {
-      this.$router.replace({ path: "/login" });
-    }
     this.getLocation();
   },
 
@@ -137,7 +131,6 @@ export default {
       }
     },
     gohosting() {
-      window.sessionStorage.removeItem("gohostingSession");
       this.$router.push({ path: "/CompanyIntroduction" });
     },
 
@@ -145,7 +138,12 @@ export default {
     toDetail(id) {
       this.$router.push({ path: "/ProductDetail/" + id });
     },
-
+    gosearch() {
+      this.$router.push({ path: "/search/" });
+    },
+    gonavigation() {
+      this.$router.push({ path: "/navigation/" });
+    },
     getNearShop(lat, lng) {
       let postData = this.$qs.stringify({
         lat: lat,
@@ -188,16 +186,14 @@ export default {
   font-size: 12px;
 }
 
-/* .top_sear {
+.top_sear {
   width: 100%;
   height: 44px;
 }
 
 .sear {
-  width: 50%;
   height: 32px;
-  margin: 5px 12px 0 0;
-  border-radius: 15px;
+  border-radius: 5px;
   background: #f6f5f5;
 }
 
@@ -216,7 +212,7 @@ export default {
   display: inline-block;
   width: 50px;
   height: 100%;
-} */
+}
 
 .banner {
   width: 100%;
@@ -252,21 +248,22 @@ export default {
 }
 
 .img_rx {
-  width: 16px;
-  height: 22px;
+  width: 14px;
+  height: 20px;
   margin-right: 10px;
 }
 
 .product {
   display: inline-block;
-  width: 142px;
+  width: 143px;
   height: 259px;
   border-radius: 10px;
   box-shadow: 0px 3px 7px 0px rgba(238, 238, 238, 1);
-  margin: 0 0 20px 10px;
+  margin: 0 0 10px 10px;
 }
+
 .img_pro {
-  width: 142px;
+  width: 143px;
   height: 160px;
 }
 .img_pro img {
@@ -276,7 +273,7 @@ export default {
 
 .pro_title {
   width: 122px;
-  height: 40px;
+  height: 35px;
   margin: 10px 0 10px 10px;
 }
 

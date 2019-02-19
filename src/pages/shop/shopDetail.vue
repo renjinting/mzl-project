@@ -1,30 +1,60 @@
 <template>
   <div>
-    <div class="bgc">
-      <div class="flex-jc-center">
-        <div class="shopimg_b">
-          <img
-            src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1414761794,530721362&fm=26&gp=0.jpg"
-          >
+    <!-- <div class="flex-jc-between shop"  :style="bgimg"> -->
+    <div class="position">
+      <img src="../../assets/photo/shopimg1.png">
+      <div class="shop_mess pd-15">
+        <div class="shop_name">龙华魅姿莱美容馆</div>
+        <div class="fz12 pd-tb-15">营业时间: 10:30~23:00</div>
+        <div class="flex-jc-between">
+          <div class="fz12 address">
+            深圳市龙华新区人民北路788号(龙华友谊
+            书城隔壁)
+          </div>
+          <img class="img_location" src="../../assets/photo/locations.png">
         </div>
-      </div>
-      <div class="dt text-c">
-        <img class="dw_img" src="../../assets/mddw.png">
-        <span
-          class="txt"
-        >{{(store_province||'') + (store_city||'') + (store_district||'')+(store_Address||'')}}</span>
       </div>
     </div>
 
-    <div class="bgc flex-jc-center miaosu_b">
-      <div class="miaosu">
-        <div class="shop_name">{{store_name}}</div>
-        <div class="shop_intro">
-          店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍
-          店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍
-        </div>
-      </div>
+    <div class="item" id="shopnav">
+      <van-tabs @click="ontab" v-model="ind">
+        <van-tab :title="item" v-for="(item,index) in navtitle" :key="index">
+          <div
+            class="coupon_box position"
+            v-for="(item,index) in list"
+            :key="index"
+            v-show="ind ==0||ind==2"
+          >
+            <div class="coupon_con flex-jc-around flex-align-items">
+              <div>
+                <span class="num">101111111111111</span>
+              </div>
+            </div>
+          </div>
+
+          <div v-show="ind ==1">
+            <div class="flexbox flex-align-items">
+              <div>
+                <img class="img_header" src="../../assets/photo/banner.png">
+              </div>
+
+              <div class="flex-jc-between border-b">
+                <div>
+                  <div class="name">依依</div>
+                  <div class="fz12 fc-grey">服务1500次</div>
+                  <div>好评 99%</div>
+                </div>
+                <div>
+                  <div class="small_btn">可服务</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </van-tab>
+      </van-tabs>
     </div>
+
+    <!-- </div> -->
   </div>
 </template>
 
@@ -33,84 +63,92 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
-      store_province: "",
-      store_city: "",
-      store_Address: "",
-      store_district: "",
-      store_name: ""
+      navtitle: ["服务项目", "美容师", "服务评价"],
+      list: [{}],
+
+      ind: 1
+      // bgimg: {
+      //   background:
+      //     "url(" +
+      //     require("../../assets/photo/shopimg1.png") +
+      //     ") no-repeat top",
+      //   backgroundSize: "100% 100%"
+      // }
     };
   },
-  created() {
-    this.getdetail();
-  },
+  created() {},
   methods: {
-    getdetail() {
-      Toast.loading({ mask: true, message: "加载中..." });
-      let postData = this.$qs.stringify({
-        store_id: this.$route.query.store_id
-      });
-      this.axios
-        .post(this.API + "api/Lease/store_detail", postData)
-        .then(res => {
-          Toast.clear();
-          console.log(res.data, "getdetail");
+    ontab(index, title) {
+      console.log(index, title);
+      if (this.ind == 3) {
+        this.show = true;
+      } else {
+        this.show = false;
+      }
 
-          let resdata = res.data;
-          if (resdata.code == 200) {
-            this.store_province = resdata.data.store_province;
-            this.store_city = resdata.data.store_city;
-            this.store_district = resdata.data.store_district;
-            this.store_Address = resdata.data.store_Address;
-            this.store_name = resdata.data.store_name;
-          } else {
-            Toast.clear();
-            Toast(resdata.message);
-          }
-        });
+      this.index = index;
     }
   }
 };
 </script>
-
+<style>
+#shopnav .van-tabs__line {
+  background-color: #fff;
+  background-image: linear-gradient(90deg, #fe4171 100%, #ff5491 100%);
+}
+#shopnav .van-tab {
+  color: black;
+}
+#shopnav .van-tab--active {
+  color: #fe4171;
+}
+</style>
 <style scoped>
-.shopimg_b {
-  margin-top: 15px;
-  width: 92%;
-  height: 170px;
-  border-radius: 5px;
-  background: rebeccapurple;
-}
-.shopimg_b img {
-  width: 100%;
-  height: 100%;
-}
-.txt {
+.fz12 {
   font-size: 12px;
-  color: #dcdddf;
 }
-.dw_img {
-  width: 10px;
-  height: 12px;
+.item {
+  background: #fff;
+  padding: 10px 20px;
+  margin: 0px 15px 0 15px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 6px 1px rgba(237, 237, 237, 1);
 }
-.dt {
-  line-height: 40px;
+.shop {
+  align-items: center;
+  width: 100%;
+  height: 180px;
 }
-.miaosu_b {
-  margin-top: 12px;
-}
-.miaosu {
-  width: 92%;
+.shop_mess {
+  width: 290px;
+  position: absolute;
+  top: 0;
+  color: #fff;
 }
 .shop_name {
-  font-size: 15px;
-  font-weight: 700;
-  height: 50px;
-  line-height: 55px;
+  font-size: 16px;
+}
+.address {
+  width: 200px;
+}
+.img_location {
+  width: 12px;
+  height: 15px;
+}
+.img_header {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.name {
+  font-size: 17px;
+  font-weight: 600;
 }
 
-.shop_intro {
-  font-size: 12px;
-  color: #808080;
-  padding-bottom: 20px;
+.small_btn {
+  background: linear-gradient(90deg, #ff5491, #fe4171);
+  border-radius: 20px;
+  color: #fff;
+  padding: 3px 15px;
 }
 </style>
